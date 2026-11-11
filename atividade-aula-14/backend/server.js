@@ -9,7 +9,7 @@ const app = express();
 
 // 1. CORS configurado
 app.use(cors({
-  origin: 'http://localhost:5173', // URL do Vite React
+  origin: 'http://localhost:5173',
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));

@@ -17,17 +17,15 @@ router.post('/login', async (req, res) => {
   if (email !== mockUser.email) return res.status(404).send('Usuário não encontrado');
   
   // 2. Senha validada com bcrypt
-  const isValid = await bcrypt.compare(password, mockUser.passwordHash);
-  if (!isValid) return res.status(401).send('Credenciais inválidas');
-  
-  // 3. Token JWT gerado
-  const token = jwt.sign(
-    { id: mockUser.id },
-    process.env.SECRET_JWT,
-    { expiresIn: 86400 } // 24h
-  );
-  
-  res.json({ token });
-});
+const isValid = await bcrypt.compare(password, mockUser.passwordHash);
+if (!isValid) return res.status(401).send('Credenciais inválidas');
+
+const token = jwt.sign(
+  { id: mockUser.id },
+  process.env.SECRET_JWT,
+  { expiresIn: 86400 }
+);
+
+res.json({ token });});
 
 export default router;

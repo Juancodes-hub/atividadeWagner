@@ -11,6 +11,9 @@ function App() {
     e.preventDefault();
     try {
       const res = await api.post('/auth/login', { email, password });
+      localStorage.setItem('token', res.data.token);
+      setToken(res.data.token);
+
       // 6. Token salvo no localStorage
       localStorage.setItem('token', res.data.token);
       setToken(res.data.token);
@@ -30,12 +33,10 @@ function App() {
   };
 
   const handleLogout = () => {
-    // 8. Logout funcional
     localStorage.removeItem('token');
-    setToken(null);
+      setToken(null);
     setDashboardData('');
-  };
-
+      };
   if (token) {
     return (
       <div style={{ padding: '2rem' }}>
